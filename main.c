@@ -50,9 +50,9 @@ int main(int argc, char **argv) {
     } else if (strcmp(argv[1], "reload") == 0) {
         reload_hider(torrc);
     } else if (strcmp(argv[1], "restart") == 0) {
-        start_hider(torrc);
-        sleep(3);
         stop_hider();
+        sleep(3);
+        start_hider(torrc);
     } else if (strcmp(argv[1], "status") == 0) {
         status_hider();
     }else if (strcmp(argv[1], "help") == 0) {

@@ -39,7 +39,7 @@ void kill_apps(void) {
     for (int i = 0; i < sizeof(apps)/sizeof(apps[0]); i++) {
 
         if ((pid = pid_of(apps[i])) == -1) {
-            fprintf(stderr, "Failed to check if %s is running", apps[i]);
+            fprintf(stderr, "Failed to check if %s is running\n", apps[i]);
             continue;
         } else if (pid == 0) {
             continue;
@@ -264,7 +264,6 @@ void set_ip6tables(void) {
         }
         usleep(100000);
     } 
-    printf("ip6tables configured\n");
 }
 
 void start_tor(const char *torrc) {

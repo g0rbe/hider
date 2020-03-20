@@ -53,9 +53,7 @@ void restore_dns(void) {
 
     close(fd);
 
-    if (rename("/etc/resolv.conf.bak", "/etc/resolv.conf") == 0) {
-        printf("DNS restored\n");
-    } else {
+    if (rename("/etc/resolv.conf.bak", "/etc/resolv.conf") != 0) {
         fprintf(stderr, "Failed to restore DNS: %s\n", strerror(errno));
         exit(1);
     }
@@ -103,9 +101,7 @@ void restore_iptables(void) {
         }
     }
 
-    if (system("/usr/sbin/iptables-restore /etc/hider/rules.ip") == 0) {
-        printf("iptables restored\n");
-    } else {
+    if (system("/usr/sbin/iptables-restore /etc/hider/rules.ip") != 0) {
         fprintf(stderr, "Failed to restore iptables\n");
     }
 }
@@ -131,9 +127,7 @@ void restore_ip6tables(void) {
         }
     }
 
-    if (system("/usr/sbin/ip6tables-restore /etc/hider/rules.ip6") == 0) {
-        printf("ip6tables restored\n");
-    } else {
+    if (system("/usr/sbin/ip6tables-restore /etc/hider/rules.ip6") != 0) {
         fprintf(stderr, "Failed to restore ip6tables\n");
     }
 }
@@ -150,9 +144,7 @@ void stop_tor(void) {
         fprintf(stderr, "Tor is not running\n");
     } else {
         
-        if (kill(pid, 15) == 0) {
-            printf("Tor stopped!\n");
-        } else {
+        if (kill(pid, 15) != 0) {
             fprintf(stderr, "Failed to stop Tor: %s\n", strerror(errno));
             exit(1);
         }
@@ -164,9 +156,7 @@ void stop_nm(void) {
     if (system("/usr/bin/systemctl -q is-active NetworkManager") == 0) {
         printf("Stopping NetworkManager...\n");
 
-        if (system("/usr/bin/systemctl -q stop NetworkManager") == 0) {
-            printf("NetworkManager stopped\n");
-        } else {
+        if (system("/usr/bin/systemctl -q stop NetworkManager") != 0) {
             fprintf(stderr, "Failed to stop NetworkManager\n");
         }
     } else {
