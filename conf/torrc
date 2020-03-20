@@ -1,0 +1,20 @@
+Log notice file /etc/hider/hider.tor
+DataDirectory /var/lib/tor
+
+SocksPort 127.0.0.1:9050 IsolateDestAddr IsolateDestPort IsolateClientProtocol
+TransPort 127.0.0.1:9040 IsolateDestAddr IsolateDestPort IsolateClientProtocol
+DNSPort 127.0.0.1:53
+ControlPort 127.0.0.1:9051
+
+AutomapHostsOnResolve 1
+AutomapHostsSuffixes .exit,.onion
+VirtualAddrNetworkIPv4 10.192.0.0/10
+VirtualAddrNetworkIPv6 [FC00::]/7
+
+HardwareAccel 1
+RunAsDaemon 1
+User debian-tor
+CookieAuthentication 1
+UseEntryGuards 1
+
+MaxClientCircuitsPending 64
